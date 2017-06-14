@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-# This script asserts commited code trying to be pushed has
-# no differences from prettier-ed version.
+# This script asserts all tests (formatting, linting, unit tests
+# and integration tests) all pass.
 
 # Restore the working directory if previously stashed
 function restore_stash {
@@ -17,10 +17,7 @@ trap restore_stash EXIT
 # Temporarily clear the working directory
 stash_size=$(git stash list | wc -l)
 git stash -u > /dev/null
-git status
-
 
 # Run prettier in `-l` mode
 echo "Checking formatting"
-git status
-npm run prettier-test
+npm run test

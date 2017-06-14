@@ -2,14 +2,29 @@
 
 An Angular 4 donut chart component.
 
-#### Installation
+#### Install
 ```bash
 npm i -S CINBCUniversal/suprematism-donut-chart
 ```
 
-#### View
-- Run the example locally with `npm run example`
+#### Use
+```html
+<supre-donut-chart
+  [values]="[80]"
+  [outerRadius]="100"
+  [innerRadius]="90"
+></supre-donut-chart>
+```
 
+#### View / Contribute
+- Fork, clone locally, cd into, pull latest master, create own branch
+- `npm install`
+- `npm start` to run the example locally
+- Add feature or fix. Make sure to update examples / tests / readme
+- `npm run commit` to commit. The native git commit can be used, but this runs prettier on staged changes
+- `git push [remote-name] [branch-name]` - a pre-push git hook ensures tests (unit/integration/linting/formatting) pass
+- Make PR
+- Eat :doughnut: :plate_with_cutlery:
 
 
 ## Components
@@ -36,13 +51,3 @@ Following SUIT CSS methodologies:
 - `.DonutChart-text` - the text displayed, a descendent of .DonutChart
 - `.DonutChart-section` - a section path, a descendent of .DonutChart
 - `.DonutChart-section--[index]` - a specific section path, using the positions of the `values` input
-
-
-## Example
-```html
-<supre-donut-chart
-  [values]="[80]"
-  [outerRadius]="100"
-  [innerRadius]="90"
-></supre-donut-chart>
-```

@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  ElementRef,
-  OnDestroy,
-  OnChanges,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, Input, ElementRef, OnChanges } from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
@@ -14,8 +6,7 @@ import * as d3 from 'd3';
   templateUrl: './donut-chart.component.html',
   styleUrls: ['./donut-chart.component.scss']
 })
-export class DonutChartComponent {
-  @ViewChild('donutChart') el: ElementRef;
+export class DonutChartComponent implements OnChanges {
   @Input() values: Array<number> | number;
   @Input() outerRadius: number;
   @Input() innerRadius: number;

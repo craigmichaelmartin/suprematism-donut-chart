@@ -1,14 +1,14 @@
 import { SuprematismDonutChartPage } from './app.po';
 
-describe('suprematism-donut-chart App', () => {
+describe('suprematism-donut-chart example app', () => {
   let page: SuprematismDonutChartPage;
 
   beforeEach(() => {
     page = new SuprematismDonutChartPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should render', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getRootElement()).toBeDefined();
   });
 });
