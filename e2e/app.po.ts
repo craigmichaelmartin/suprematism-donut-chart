@@ -5,7 +5,7 @@ export class SuprematismDonutChartPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getRootElement() {
+    return element(by.css('supre-root'));
   }
 }

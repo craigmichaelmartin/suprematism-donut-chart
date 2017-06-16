@@ -6,9 +6,17 @@
   "typings": "src/index.d.ts",
   "scripts": {
     "start": "ng serve",
-    "test": "ng test",
+    "test": "npm run prettier-test && npm run lint && npm run test:unit && npm run test:e2e",
+    "test:unit": "ng test --watch=false",
+    "test:e2e": "ng e2e",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "commit": "bash .scripts/commit.sh",
+    "prepush": "bash .scripts/pre-push.sh",
+    "_prettier": "prettier --print-width 80 --tab-width 2 --single-quote --trailing-comma none",
+    "_prettier-write": "npm run _prettier -- --write",
+    "_prettier-test": "npm run _prettier -- -l",
+    "prettier": "npm run _prettier-write -- \"src/**/*.ts\"",
+    "prettier-test": "npm run _prettier-test -- \"src/**/*.ts\""
   },
   "private": true,
   "peerDependencies": {
@@ -41,6 +49,7 @@
     "codelyzer": "~2.0.0",
     "core-js": "^2.4.1",
     "d3": "^4.7.4",
+    "husky": "^0.13.4",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",
@@ -49,6 +58,7 @@
     "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "prettier": "^1.4.4",
     "protractor": "~5.1.0",
     "rxjs": "^5.1.0",
     "ts-node": "~2.0.0",

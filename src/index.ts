@@ -5,19 +5,9 @@ import { NgModule } from '@angular/core';
 export * from './donut-chart.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-    ],
-    declarations: [
-        DonutChartComponent,
-    ],
-    exports: [
-        DonutChartComponent,
-    ],
-    entryComponents: [
-        DonutChartComponent,
-    ]
+  imports: [CommonModule],
+  declarations: [DonutChartComponent],
+  exports: [DonutChartComponent],
+  entryComponents: [DonutChartComponent]
 })
-export class DonutChartModule {
-
-}
+export class DonutChartModule {}

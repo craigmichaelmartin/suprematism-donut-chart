@@ -1,28 +1,53 @@
-# SuprematismDonutChart
+# Suprematism Donut Chart
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+An Angular 4 donut chart component.
 
-## Development server
+#### Install
+```bash
+npm i -S CINBCUniversal/suprematism-donut-chart
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Use
+```html
+<supre-donut-chart
+  [values]="[80]"
+  [outerRadius]="100"
+  [innerRadius]="90"
+></supre-donut-chart>
+```
 
-## Code scaffolding
+#### View / Contribute
+- Fork, clone locally, cd into, pull latest master, create own branch
+- `npm install`
+- `npm start` to run the example locally
+- Add feature or fix. Make sure to update examples / tests / readme
+- `npm run commit` to commit. The native git commit can be used, but this runs prettier on staged changes
+- `git push [remote-name] [branch-name]` - a pre-push git hook ensures tests (unit/integration/linting/formatting) pass
+- Make PR
+- Eat :doughnut: :plate_with_cutlery:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
 
-## Build
+## Components
+- [`supre-donut-chart`](#supre-donut-chart)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### <a id="supre-donut-chart"></a> `supre-donut-chart`
+A component for a donut chart.
 
-## Running unit tests
+#### Inputs
+- `values: Array<number> | number` - The values the donut chart will display. If displaying a percentage, simply pass in the single percent number. This input is mandatory.
+- `outerRadius: number` - The outer radius of the donut chart. This input is mandatory.
+- `innerRadius: number` - The inner radius of the donut chart. This input is mandatory.
+- `text: string` - A value to be displayed. If there is a single number for `values`, that number will be used.
+- `colors: Array<string>` - An array of colors to use for the donut sections. This defaults to `d3.schemeCategory20`. Alternatively, these sections may be styled using the exposed element classes (see below).
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Hooks
 
-## Running end-to-end tests
+##### Javascript (Events)
+There are no events for this component
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+##### Styling (Classes)
+Following SUIT CSS methodologies:
+- `.DonutChart` - the parent
+- `.DonutChart-text` - the text displayed, a descendent of .DonutChart
+- `.DonutChart-section` - a section path, a descendent of .DonutChart
+- `.DonutChart-section--[index]` - a specific section path, using the positions of the `values` input
