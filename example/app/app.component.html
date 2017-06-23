@@ -1,19 +1,30 @@
-<supre-donut-chart
-  [values]="[80]"
-  [outerRadius]="100"
-  [innerRadius]="90"
-></supre-donut-chart>
-
-<supre-donut-chart
-  [values]="[30]"
-  [outerRadius]="10"
-  [innerRadius]="8"
-></supre-donut-chart>
+<div>
+  <label>height:
+    <input placeholder="height" [(ngModel)]="height">
+  </label>
+  <label>width:
+    <input placeholder="width" [(ngModel)]="width">
+  </label>
+</div>
 
 <supre-donut-chart
   [values]="50"
-  [outerRadius]="25"
-  [innerRadius]="22"
+  [height]="height"
+  [width]="width"
 >
-  50
+  50%
+</supre-donut-chart>
+<supre-donut-chart
+    [values]="[80]"
+    [height]="'100px'"
+    [width]="'100px'"
+>
+  80%
+</supre-donut-chart>
+<supre-donut-chart
+    [values]="[30]"
+    [height]="'100%%'"
+    [width]="'100%'"
+>
+  30%
 </supre-donut-chart>
