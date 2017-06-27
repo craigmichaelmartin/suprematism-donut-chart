@@ -78,9 +78,9 @@ describe('Donut Chart', () => {
 @Component({
   selector: 'supre-test-comp',
   template: `
-    <supre-donut-chart [values]="buttonValues"
-                       [outerRadius]="buttonOuterRadius"
-                       [innerRadius]="buttonInnerRadius">
+    <supre-donut-chart [values]="values"
+                       [outerRadius]="outerRadius"
+                       [innerRadius]="innerRadius">
       33
     </supre-donut-chart>
   `
