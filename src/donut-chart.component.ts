@@ -1,5 +1,12 @@
 import {
-  Component, Input, ElementRef, OnChanges, ChangeDetectionStrategy, OnInit, HostBinding, AfterViewChecked, AfterViewInit
+  Component,
+  Input,
+  ElementRef,
+  OnChanges,
+  ChangeDetectionStrategy,
+  OnInit,
+  HostBinding,
+  AfterViewChecked
 } from '@angular/core';
 import * as d3 from 'd3';
 import { Pie } from 'd3-shape';
@@ -10,7 +17,8 @@ import { Pie } from 'd3-shape';
   styleUrls: ['./donut-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DonutChartComponent implements OnInit, OnChanges, AfterViewChecked {
+export class DonutChartComponent
+  implements OnInit, OnChanges, AfterViewChecked {
   private vals: Array<number>;
   private chart;
   private calculatedHeight: number;
@@ -21,7 +29,7 @@ export class DonutChartComponent implements OnInit, OnChanges, AfterViewChecked 
   @Input()
   get values(): Array<number> | number {
     return this.vals;
-  };
+  }
   set values(vals: Array<number> | number) {
     if (Array.isArray(vals)) {
       this.vals = vals;
@@ -74,18 +82,20 @@ export class DonutChartComponent implements OnInit, OnChanges, AfterViewChecked 
 
   ngOnChanges() {
     this.calculateDimensions();
-    this.innerRadius = (this.outerRadius / 5) * 4;
+    this.innerRadius = this.outerRadius / 5 * 4;
   }
 
   ngAfterViewChecked() {
     this.calculateDimensions();
-    this.elementRef.nativeElement.style.fontSize = `${this.outerRadius / 1.5}px`;
+    this.elementRef.nativeElement.style.fontSize = `${this.outerRadius /
+      1.5}px`;
   }
 
   private calculateDimensions() {
     this.calculatedHeight = this.elementRef.nativeElement.getBoundingClientRect().height;
     this.calculatedWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-    this.outerRadius = Math.min(this.calculatedWidth, this.calculatedHeight) / 2;
+    this.outerRadius =
+      Math.min(this.calculatedWidth, this.calculatedHeight) / 2;
   }
 
   createDonutChart() {

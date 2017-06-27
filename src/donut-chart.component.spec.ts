@@ -25,10 +25,10 @@ describe('Donut Chart', () => {
     it(
       'should be text if provided',
       async(() => {
-          const innerHTML = fixture.debugElement
-            .query(By.css('.DonutChart-text'))
-            .nativeElement.innerHTML.trim();
-          expect(innerHTML).toEqual('33');
+        const innerHTML = fixture.debugElement
+          .query(By.css('.DonutChart-text'))
+          .nativeElement.innerHTML.trim();
+        expect(innerHTML).toEqual('33');
       })
     );
   });
