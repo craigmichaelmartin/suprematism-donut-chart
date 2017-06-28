@@ -26,6 +26,7 @@ export class DonutChartComponent
   private wd: string;
   private outerRadius: number;
   private innerRadius: number;
+  private innerWd: string;
 
   @Input()
   get values(): Array<number> | number {
@@ -45,7 +46,17 @@ export class DonutChartComponent
   }
 
   @Input() colors: Array<string> = d3.schemeCategory20;
-  @Input() innerWidth: string;
+
+  /**
+   * The width of the donut hole.  Defaults to 80% if no value is specified.
+   */
+  @Input()
+  get innerWidth(): string {
+    return this.innerWd ? this.innerWidth : '80%';
+  }
+  set innerWidth(innerWd: string) {
+    this.innerWd = innerWd;
+  }
 
   /**
    * Height of the component in px or %.  Defaults to 100% if no height is specified.
