@@ -37,8 +37,6 @@ describe('Donut Chart', () => {
       'should be the input if array and more than two values',
       async(() => {
         componentInstance.values = [80, 90];
-        componentInstance.outerRadius = 100;
-        componentInstance.innerRadius = 96;
         fixture.detectChanges();
         fixture.whenStable().then(() => {
           expect(componentInstance.values).toEqual([80, 90]);
@@ -49,8 +47,6 @@ describe('Donut Chart', () => {
       'should be array of value and offset in single value array ',
       async(() => {
         componentInstance.values = [80];
-        componentInstance.outerRadius = 100;
-        componentInstance.innerRadius = 96;
 
         fixture.whenStable().then(() => {
           expect(componentInstance.values).toEqual([80]);
@@ -61,11 +57,29 @@ describe('Donut Chart', () => {
       'should be array of value and offset in single number ',
       async(() => {
         componentInstance.values = 80;
-        componentInstance.outerRadius = 100;
-        componentInstance.innerRadius = 96;
 
         fixture.whenStable().then(() => {
           expect(componentInstance.values).toEqual(80);
+        });
+      })
+    );
+  });
+  describe('donut thickness', () => {
+    it(
+      'should correspond to inner width',
+      async(() => {
+        componentInstance.values = 80;
+        componentInstance.innerWidth = '80%';
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          const svg = fixture.nativeElement.querySelector(
+            '.DonutChart-section.DonutChart-section--0'
+          ) as HTMLElement;
+          expect(svg.getAttribute('d')).toBe(
+            'M5.51091059616309e-16,-9A9,9,0,1,1,-8.559508646656383,' +
+              '-2.7811529493745257L-6.847606917325106,-2.2249223594' +
+              '996206A7.2,7.2,0,1,0,4.4087284769304716e-16,-7.2Z'
+          );
         });
       })
     );
@@ -79,14 +93,16 @@ describe('Donut Chart', () => {
   selector: 'supre-test-comp',
   template: `
     <supre-donut-chart [values]="values"
-                       [outerRadius]="outerRadius"
-                       [innerRadius]="innerRadius">
+                       [width]="width"
+                       [height]="height"
+                       [innerWidth]="innerWidth">
       33
     </supre-donut-chart>
   `
 })
 class TestComponent {
   values: number | Array<number>;
-  outerRadius: number;
-  innerRadius: number;
+  width: string;
+  height: string;
+  innerWidth: string;
 }

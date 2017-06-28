@@ -5,12 +5,16 @@
   <label>width:
     <input placeholder="width" [(ngModel)]="width">
   </label>
+  <label>inner width:
+    <input placeholder="inner width" [(ngModel)]="innerWidth">
+  </label>
 </div>
 
 <supre-donut-chart
   [values]="50"
   [height]="height"
   [width]="width"
+  [innerWidth]="innerWidth"
 >
   50%
 </supre-donut-chart>

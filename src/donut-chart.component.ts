@@ -20,11 +20,12 @@ import { Pie } from 'd3-shape';
 export class DonutChartComponent
   implements OnInit, OnChanges, AfterViewChecked {
   private vals: Array<number>;
-  private chart;
   private calculatedHeight: number;
   private calculatedWidth: number;
   private ht: string;
   private wd: string;
+  private outerRadius: number;
+  private innerRadius: number;
 
   @Input()
   get values(): Array<number> | number {
@@ -42,9 +43,9 @@ export class DonutChartComponent
       this.vals = this.vals.concat(100 - value);
     }
   }
-  @Input() outerRadius: number;
-  @Input() innerRadius: number;
+
   @Input() colors: Array<string> = d3.schemeCategory20;
+  @Input() innerWidth: string;
 
   /**
    * Height of the component in px or %.  Defaults to 100% if no height is specified.
@@ -82,7 +83,12 @@ export class DonutChartComponent
 
   ngOnChanges() {
     this.calculateDimensions();
-    this.innerRadius = this.outerRadius / 5 * 4;
+    if (!this.innerWidth) {
+      this.innerWidth = '80';
+    }
+    this.innerRadius = this.outerRadius * (parseFloat(this.innerWidth) / 100);
+    this.clearChart();
+    this.createDonutChart();
   }
 
   ngAfterViewChecked() {
@@ -123,5 +129,9 @@ export class DonutChartComponent
       .attr('class', (d, i) => `DonutChart-section DonutChart-section--${i}`)
       .attr('fill', (d, i) => this.colors[i % this.colors.length])
       .attr('d', arc);
+  }
+
+  private clearChart() {
+    d3.select(this.elementRef.nativeElement).selectAll('g').remove();
   }
 }
