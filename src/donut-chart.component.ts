@@ -52,7 +52,7 @@ export class DonutChartComponent
    */
   @Input()
   get innerWidth(): string {
-    return this.innerWd ? this.innerWidth : '80%';
+    return this.innerWd ? this.innerWd : '80%';
   }
   set innerWidth(innerWd: string) {
     this.innerWd = innerWd;
@@ -94,9 +94,6 @@ export class DonutChartComponent
 
   ngOnChanges() {
     this.calculateDimensions();
-    if (!this.innerWidth) {
-      this.innerWidth = '80';
-    }
     this.innerRadius = this.outerRadius * (parseFloat(this.innerWidth) / 100);
     this.clearChart();
     this.createDonutChart();
