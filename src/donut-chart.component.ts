@@ -5,8 +5,7 @@ import {
   OnChanges,
   ChangeDetectionStrategy,
   OnInit,
-  HostBinding,
-  AfterViewChecked
+  HostBinding
 } from '@angular/core';
 import * as d3 from 'd3';
 import { Pie } from 'd3-shape';
@@ -18,15 +17,10 @@ import { Pie } from 'd3-shape';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DonutChartComponent
-  implements OnInit, OnChanges, AfterViewChecked {
+  implements OnInit, OnChanges {
+  private static readonly outerRadius = 50;
   private vals: Array<number>;
-  private calculatedHeight: number;
-  private calculatedWidth: number;
-  private ht: string;
-  private wd: string;
-  private outerRadius: number;
-  private innerRadius: number;
-  private innerWd: string;
+  private thickness: number;
 
   @Input()
   get values(): Array<number> | number {
@@ -48,40 +42,14 @@ export class DonutChartComponent
   @Input() colors: Array<string> = d3.schemeCategory20;
 
   /**
-   * The width of the donut hole.  Defaults to 80% if no value is specified.
+   * The thickness of the donut.  Defaults to 20% if no value is specified.
    */
   @Input()
-  get innerWidth(): string {
-    return this.innerWd ? this.innerWd : '80%';
+  get thicknessPct(): number {
+    return this.thickness ? this.thickness / 2 : 10;
   }
-  set innerWidth(innerWd: string) {
-    this.innerWd = innerWd;
-  }
-
-  /**
-   * Height of the component in px or %.  Defaults to 100% if no height is specified.
-   * @returns {string}
-   */
-  @Input()
-  @HostBinding('style.height')
-  get height(): string {
-    return this.ht ? this.ht : '100%';
-  }
-  set height(ht: string) {
-    this.ht = ht;
-  }
-
-  /**
-   * Width of the component in px or %.  Defaults to 100% if no width is specified.
-   * @returns {string}
-   */
-  @Input()
-  @HostBinding('style.width')
-  get width(): string {
-    return this.wd ? this.wd : '100%';
-  }
-  set width(wd: string) {
-    this.wd = wd;
+  set thicknessPct(thickness: number) {
+    this.thickness = thickness;
   }
 
   @HostBinding('class.DonutChart') true;
@@ -93,23 +61,8 @@ export class DonutChartComponent
   }
 
   ngOnChanges() {
-    this.calculateDimensions();
-    this.innerRadius = this.outerRadius * (parseFloat(this.innerWidth) / 100);
     this.clearChart();
     this.createDonutChart();
-  }
-
-  ngAfterViewChecked() {
-    this.calculateDimensions();
-    this.elementRef.nativeElement.style.fontSize = `${this.outerRadius /
-      1.5}px`;
-  }
-
-  private calculateDimensions() {
-    this.calculatedHeight = this.elementRef.nativeElement.getBoundingClientRect().height;
-    this.calculatedWidth = this.elementRef.nativeElement.getBoundingClientRect().width;
-    this.outerRadius =
-      Math.min(this.calculatedWidth, this.calculatedHeight) / 2;
   }
 
   createDonutChart() {
@@ -117,17 +70,16 @@ export class DonutChartComponent
 
     const arc: any = d3
       .arc()
-      .innerRadius(this.innerRadius)
-      .outerRadius(this.outerRadius);
+      .innerRadius(DonutChartComponent.outerRadius - this.thicknessPct)
+      .outerRadius(DonutChartComponent.outerRadius);
 
-    const side = Math.min(this.calculatedWidth, this.calculatedHeight);
     const svg = d3
       .select(this.elementRef.nativeElement)
       .selectAll('svg')
-      .attr('viewBox', `0 0 ${side} ${side}`)
+      .attr('viewBox', '0 0 100 100')
       .append('g')
       .attr('class', 'donut')
-      .attr('transform', `translate(${side / 2}, ${side / 2})`);
+      .attr('transform', 'translate(50, 50)');
 
     const path = svg
       .selectAll('path')

@@ -66,19 +66,19 @@ describe('Donut Chart', () => {
   });
   describe('donut thickness', () => {
     it(
-      'should correspond to inner width',
+      'should correspond to thicknessPct',
       async(() => {
         componentInstance.values = 80;
-        componentInstance.innerWidth = '80%';
+        componentInstance.thicknessPct = 20;
         fixture.detectChanges();
         fixture.whenStable().then(() => {
           const svg = fixture.nativeElement.querySelector(
             '.DonutChart-section.DonutChart-section--0'
           ) as HTMLElement;
           expect(svg.getAttribute('d')).toBe(
-            'M5.51091059616309e-16,-9A9,9,0,1,1,-8.559508646656383,' +
-              '-2.7811529493745257L-6.847606917325106,-2.2249223594' +
-              '996206A7.2,7.2,0,1,0,4.4087284769304716e-16,-7.2Z'
+            'M3.061616997868383e-15,-50A50,50,0,1,1,-47.55282581475768,' +
+              '-15.450849718747364L-38.042260651806146,-12.3606797' +
+              '74997891A40,40,0,1,0,2.4492935982947065e-15,-40Z'
           );
         });
       })
@@ -93,9 +93,9 @@ describe('Donut Chart', () => {
   selector: 'supre-test-comp',
   template: `
     <supre-donut-chart [values]="values"
-                       [width]="width"
-                       [height]="height"
-                       [innerWidth]="innerWidth">
+                       [style.width]="width"
+                       [style.height]="height"
+                       [thicknessPct]="thicknessPct">
       33
     </supre-donut-chart>
   `
@@ -104,5 +104,5 @@ class TestComponent {
   values: number | Array<number>;
   width: string;
   height: string;
-  innerWidth: string;
+  thicknessPct: number;
 }

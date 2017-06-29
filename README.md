@@ -11,9 +11,7 @@ npm i -S CINBCUniversal/suprematism-donut-chart
 ```html
 <supre-donut-chart
   [values]="[80]"
-  [width]="100px"
-  [height]="90px"
-  [innerWidth]="80%"
+  [thicknessPct]="20"
 ></supre-donut-chart>
 ```
 
@@ -36,9 +34,7 @@ A component for a donut chart.
 
 #### Inputs
 - `values: Array<number> | number` - The values the donut chart will display. If displaying a percentage, simply pass in the single percent number. This input is mandatory.
-- `width: string` - The height of the donut chart. Will default to 100% if no value is specified.
-- `height: string` - The width of the donut chart. Will default to 100% if no value is specified.
-- `innerWidth: string` - The width of the donut hole as a percentage.  Will default to 80% if no value is specified
+- `thicknessPct: number` - The thickness of the donut as a percentage.  Will default to 20% if no value is specified.
 - `colors: Array<string>` - An array of colors to use for the donut sections. This defaults to `d3.schemeCategory20`. Alternatively, these sections may be styled using the exposed element classes (see below).
 
 #### Hooks
