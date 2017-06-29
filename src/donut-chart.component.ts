@@ -16,8 +16,7 @@ import { Pie } from 'd3-shape';
   styleUrls: ['./donut-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DonutChartComponent
-  implements OnInit, OnChanges {
+export class DonutChartComponent implements OnInit, OnChanges {
   private static readonly outerRadius = 50;
   private vals: Array<number>;
   private thickness: number;
