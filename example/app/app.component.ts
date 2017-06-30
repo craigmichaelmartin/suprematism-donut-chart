@@ -5,5 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app works!';
+  public title = 'app works!';
+  public height = '50px';
+  public width = '50px';
+  public thicknessPct = 20;
 }

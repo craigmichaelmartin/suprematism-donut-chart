@@ -1,12 +1,19 @@
-/deep/ .DonutChart {
+:host {
   display: block;
   position: relative;
-}
-.DonutChart-text {
-  height: 100%;
-  position: absolute;
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+
+  .DonutChart-text {
+    height: 100%;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+  }
 }

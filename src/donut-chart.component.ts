@@ -1,62 +1,96 @@
-import { Component, Input, ElementRef, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  ElementRef,
+  OnChanges,
+  ChangeDetectionStrategy,
+  OnInit,
+  HostBinding
+} from '@angular/core';
 import * as d3 from 'd3';
+import { Pie } from 'd3-shape';
 
 @Component({
   selector: 'supre-donut-chart',
   templateUrl: './donut-chart.component.html',
-  styleUrls: ['./donut-chart.component.scss']
+  styleUrls: ['./donut-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DonutChartComponent implements OnChanges {
-  @Input() values: Array<number> | number;
-  @Input() outerRadius: number;
-  @Input() innerRadius: number;
-  @Input() text: string;
+export class DonutChartComponent implements OnInit, OnChanges {
+  private static readonly outerRadius = 50;
+  private vals: Array<number>;
+  private thickness: number;
+
+  @Input()
+  get values(): Array<number> | number {
+    return this.vals;
+  }
+  set values(vals: Array<number> | number) {
+    if (Array.isArray(vals)) {
+      this.vals = vals;
+    } else {
+      this.vals = [vals];
+    }
+
+    if (this.vals.length === 1) {
+      const value = this.vals[0];
+      this.vals = this.vals.concat(100 - value);
+    }
+  }
+
   @Input() colors: Array<string> = d3.schemeCategory20;
+
+  /**
+   * The thickness of the donut.  Defaults to 20% if no value is specified.
+   */
+  @Input()
+  get thicknessPct(): number {
+    return this.thickness ? this.thickness / 2 : 10;
+  }
+  set thicknessPct(thickness: number) {
+    this.thickness = thickness;
+  }
+
+  @HostBinding('class.DonutChart') true;
 
   constructor(private elementRef: ElementRef) {}
 
+  public ngOnInit() {
+    this.createDonutChart();
+  }
+
   ngOnChanges() {
-    if (!Array.isArray(this.values)) {
-      this.values = [this.values];
-    }
-    if (this.values.length === 1) {
-      const value = this.values[0];
-      if (!this.text) {
-        this.text = `${value}%`;
-      }
-      this.values = this.values.concat(100 - value);
-    }
-    this.elementRef.nativeElement.style.width = `${this.outerRadius * 2}px`;
-    this.elementRef.nativeElement.style.height = `${this.outerRadius * 2}px`;
-    this.elementRef.nativeElement.style.fontSize = `${this.outerRadius /
-      1.5}px`;
-    this.elementRef.nativeElement.classList.add('DonutChart');
+    this.clearChart();
     this.createDonutChart();
   }
 
   createDonutChart() {
-    const pie = d3.pie().sort(null);
+    const pie: Pie<any, number | { valueOf(): number }> = d3.pie().sort(null);
 
-    const arc = d3
+    const arc: any = d3
       .arc()
-      .innerRadius(this.innerRadius)
-      .outerRadius(this.outerRadius);
+      .innerRadius(DonutChartComponent.outerRadius - this.thicknessPct)
+      .outerRadius(DonutChartComponent.outerRadius);
 
     const svg = d3
       .select(this.elementRef.nativeElement)
-      .append('svg')
-      .attr('width', this.outerRadius * 2)
-      .attr('height', this.outerRadius * 2)
+      .selectAll('svg')
+      .attr('viewBox', '0 0 100 100')
       .append('g')
-      .attr('transform', `translate(${this.outerRadius},${this.outerRadius})`);
+      .attr('class', 'donut')
+      .attr('transform', 'translate(50, 50)');
 
     const path = svg
       .selectAll('path')
-      .data(pie(this.values))
+      .data(pie(this.vals))
       .enter()
       .append('path')
       .attr('class', (d, i) => `DonutChart-section DonutChart-section--${i}`)
       .attr('fill', (d, i) => this.colors[i % this.colors.length])
       .attr('d', arc);
+  }
+
+  private clearChart() {
+    d3.select(this.elementRef.nativeElement).selectAll('g').remove();
   }
 }
