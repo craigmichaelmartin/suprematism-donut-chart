@@ -50,7 +50,6 @@
     "@types/node": "^6.0.85",
     "codelyzer": "~2.0.0",
     "core-js": "^2.4.1",
-    "d3": "^4.10.0",
     "git-quality": "github:CINBCUniversal/git-quality",
     "husky": "^0.13.4",
     "jasmine-core": "~2.5.2",
