@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "pretest": "npm update",
     "test": "npm run prettier-test && npm run lint && npm run test:unit && npm run test:e2e",
-    "test:ci": "npm run prettier-test && npm run lint && npm run test:unit && npm run test:e2e:ci",
+    "test:ci": "npm run prettier-test && npm run lint && npm run test:unit:ci && npm run test:e2e:ci",
     "test:unit": "ng test --watch=false",
     "test:unit:ci": "karma start karma.sauce.conf.js",
     "test:e2e": "ng e2e",
