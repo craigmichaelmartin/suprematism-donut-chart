@@ -7,16 +7,9 @@ import { AppComponent } from './app.component';
 import { DonutChartModule } from '../../src/index';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    DonutChartModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, FormsModule, HttpModule, DonutChartModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

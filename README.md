@@ -1,5 +1,7 @@
 # Suprematism Donut Chart
 
+[![Build Status][travis-badge]][travis-badge-url]
+
 An Angular 4 donut chart component.
 
 #### Install
@@ -48,3 +50,6 @@ Following SUIT CSS methodologies:
 - `.DonutChart-text` - the text displayed, a descendent of .DonutChart
 - `.DonutChart-section` - a section path, a descendent of .DonutChart
 - `.DonutChart-section--[index]` - a specific section path, using the positions of the `values` input
+
+[travis-badge]: https://travis-ci.org/CINBCUniversal/suprematism-donut-chart.svg?branch=master
+[travis-badge-url]: https://travis-ci.org/CINBCUniversal/suprematism-donut-chart
