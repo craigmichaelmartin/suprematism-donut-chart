@@ -1,5 +1,7 @@
 # Suprematism Donut Chart
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/CINBCUniversal/suprematism-donut-chart.svg)](https://greenkeeper.io/)
+
 [![Build Status][travis-badge]][travis-badge-url]
 
 An Angular 4 donut chart component.
